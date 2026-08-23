@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vice City — Carte interactive</title>
+<style>
+:root{--bg:#101419;--panel:#171d24;--line:#2a3440;--text:#eef3f7;--muted:#9aa8b5;--accent:#ff6b35}
+*{box-sizing:border-box} html,body{margin:0;height:100%;overflow:hidden;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--text)}
+header{height:58px;display:flex;align-items:center;gap:14px;padding:0 18px;background:#11171d;border-bottom:1px solid var(--line);position:relative;z-index:20}
+header b{font-size:11px} .tag{font-size:12px;color:var(--muted)}
+.actions{margin-left:auto;display:flex;gap:8px}
+button,input,select,textarea{font:inherit}
+button{border:1px solid var(--line);background:#202832;color:white;border-radius:9px;padding:9px 12px;cursor:pointer}
+button.primary{background:var(--accent);border-color:var(--accent);font-weight:700}
+button.danger{background:#421d22;border-color:#6c2932}
+#app{height:calc(100% - 58px);display:grid;grid-template-columns:280px 1fr}
+aside{background:var(--panel);border-right:1px solid var(--line);padding:14px;overflow:auto;z-index:15}
+.search{width:100%;background:#0f1419;border:1px solid var(--line);border-radius:9px;color:white;padding:10px}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.filter{font-size:12px;padding:6px 8px}.filter.active{border-color:var(--accent);color:#fff}
+.poirow{padding:10px;border:1px solid var(--line);border-radius:9px;margin:7px 0;cursor:pointer;background:#131920}
+.poirow small{display:block;color:var(--muted);margin-top:3px}
+#viewport{position:relative;overflow:hidden;background:#91a9c1;cursor:grab}
+#viewport.adding{cursor:crosshair}
+#world{position:absolute;left:0;top:0;transform-origin:0 0;user-select:none}
+#map{display:block;width:min(100vw,1400px);height:auto;pointer-events:none}
+.marker{position:absolute;transform:translate(-50%,-50%) scale(var(--marker-scale,1));transform-origin:center;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#17191c;border:2px solid #30343a;box-shadow:0 3px 12px #0009;cursor:pointer;font-size:11px}
+.marker::after{content:"";position:absolute;width:5px;height:5px;border-radius:50%;border:1px solid var(--accent)}
+.marker:hover{z-index:10}
+.tip{position:absolute;left:42px;white-space:nowrap;background:#101419eF;border:1px solid var(--line);padding:6px 8px;border-radius:7px;font-size:12px;display:none}
+.marker:hover .tip{display:block}
+#zoom{position:absolute;right:14px;bottom:14px;z-index:10;display:flex;gap:5px}
+.modal{position:fixed;inset:0;background:#0009;z-index:50;display:none;place-items:center}
+.modal.open{display:grid}.card{width:min(440px,92vw);background:#171d24;border:1px solid #34404d;border-radius:14px;padding:18px;box-shadow:0 20px 80px #000}
+.card h2{margin:0 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+label{font-size:12px;color:var(--muted)}label span{display:block;margin-bottom:5px}
+input,select,textarea{width:100%;background:#0f1419;border:1px solid var(--line);color:white;border-radius:8px;padding:9px}
+textarea{resize:vertical;min-height:70px}.full{grid-column:1/-1}.cardfooter{display:flex;gap:8px;justify-content:flex-end;margin-top:14px}
+.help{font-size:12px;line-height:1.45;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;margin-top:14px}
+@media(max-width:720px){#app{grid-template-columns:1fr}aside{display:none}header .tag{display:none}}
+</style>
+</head>
+<body>
+<header><b>🗺️ VICE CITY — Carte interactive</b><span class="tag">Arma 3 • Points d'intérêt</span>
+<div class="actions"><button id="exportBtn">Exporter</button><button id="importBtn">Importer</button><button class="primary" id="addBtn">＋ Ajouter un point</button></div></header>
+<div id="app">
+<aside>
+<input id="search" class="search" placeholder="Rechercher un lieu, propriétaire…">
+<div class="filters" id="filters"></div>
+<div id="list"></div>
+<div class="help">💡 Clique sur <b>Ajouter un point</b>, puis directement sur la carte. Les coordonnées X/Y sont calculées automatiquement en pourcentage.<br><br>Les points affichés proviennent de <b>points.json</b>. Après modification, utilise <b>Exporter</b> puis remplace le fichier points.json sur ton hébergement.</div>
+</aside>
+<main id="viewport">
+<div id="world"><img id="map" src="carte.png" alt="Carte"><div id="markers"></div></div>
+<div id="zoom"><button id="minus">−</button><button id="reset">100%</button><button id="plus">＋</button></div>
+</main>
+</div>
+<input id="fileInput" type="file" accept=".json" hidden>
+<div class="modal" id="modal"><div class="card">
+<h2 id="modalTitle">Ajouter un point d'intérêt</h2>
+<div class="grid">
+<label><span>Nom</span><input id="name" placeholder="Ex : Commissariat"></label>
+<label><span>Catégorie</span><select id="category"><option>Maison</option><option>Momo</option><option>Replaqueur</option><option>Dent en or</option><option>Héro</option><option>Coca</option><option>Maji</option><option>Amphore</option><option>Maison cambu</option><option>Gang</option><option>Craft Arme</option><option>Autres</option></select></label>
+<label><span>Propriétaire / responsable</span><input id="owner" placeholder="Facultatif"></label>
+<label><span>Icône</span><select id="icon"><option>📍</option><option>🏠</option><option>🚓</option><option>🏥</option><option>🔧</option><option>🏢</option><option>🛒</option><option>💰</option><option>⚓</option><option>✈️</option></select></label>
+<label><span>X (%)</span><input id="x" type="number" step=".0001"></label>
+<label><span>Y (%)</span><input id="y" type="number" step=".0001"></label>
+<label class="full"><span>Description</span><textarea id="desc" placeholder="Informations complémentaires…"></textarea></label>
+</div>
+<div class="cardfooter"><button class="danger" id="deleteBtn" style="margin-right:auto;display:none">Supprimer</button><button id="cancelBtn">Annuler</button><button class="primary" id="saveBtn">Enregistrer</button></div>
+</div></div>
+<script>
+let pois=[], editing=null, adding=false;
+let scale=1, tx=0, ty=0, drag=false, sx=0, sy=0;
+const $=s=>document.querySelector(s), map=$("#map"), world=$("#world"), viewport=$("#viewport");
+const categories=["Tous","Maison","Momo","Replaqueur","Dent en or","Héro","Coca","Maji","Amphore","Maison cambu","Gang","Craft Arme","Autres"];
+let filter="Tous";
+function persist(){ /* Pas de BDD/localStorage : utiliser Exporter pour mettre à jour points.json */ }
+function render(){
+ $("#markers").innerHTML=""; $("#list").innerHTML="";
+ const q=$("#search").value.toLowerCase();
+ pois.filter(p=>(filter==="Tous"||p.category===filter)&&JSON.stringify(p).toLowerCase().includes(q)).forEach(p=>{
+  const m=document.createElement("div");m.className="marker";m.style.left=p.x+"%";m.style.top=p.y+"%";m.textContent=p.icon||"📍";
+  const t=document.createElement("span");t.className="tip";t.textContent=p.name+(p.owner?" • "+p.owner:"");m.appendChild(t);m.onclick=e=>{e.stopPropagation();openModal(p)};$("#markers").appendChild(m);
+  const r=document.createElement("div");r.className="poirow";r.innerHTML=`<b>${p.icon||"📍"} ${esc(p.name)}</b><small>${esc(p.category)}${p.owner?" • "+esc(p.owner):""}</small>`;r.onclick=()=>centerOn(p);$("#list").appendChild(r);
+ });
+}
+function esc(s=""){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+function makeFilters(){categories.forEach(c=>{let b=document.createElement("button");b.className="filter"+(c==="Tous"?" active":"");b.textContent=c;b.onclick=()=>{filter=c;document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");render()};$("#filters").appendChild(b)})}
+function openModal(p=null,x=null,y=null){editing=p?.id||null;$("#modalTitle").textContent=p?"Modifier le point":"Ajouter un point d'intérêt";$("#name").value=p?.name||"";$("#category").value=p?.category||"Maison";$("#owner").value=p?.owner||"";$("#icon").value=p?.icon||"📍";$("#x").value=p?.x??x;$("#y").value=p?.y??y;$("#desc").value=p?.desc||"";$("#deleteBtn").style.display=p?"block":"none";$("#modal").classList.add("open")}
+function closeModal(){$("#modal").classList.remove("open");adding=false;viewport.classList.remove("adding");$("#addBtn").textContent="＋ Ajouter un point"}
+$("#saveBtn").onclick=()=>{let p={id:editing||Date.now(),name:$("#name").value.trim()||"Point sans nom",category:$("#category").value,owner:$("#owner").value.trim(),icon:$("#icon").value,x:+$("#x").value,y:+$("#y").value,desc:$("#desc").value.trim()};if(editing)pois=pois.map(a=>a.id===editing?p:a);else pois.push(p);persist();render();closeModal()}
+$("#deleteBtn").onclick=()=>{if(editing&&confirm("Supprimer ce point ?")){pois=pois.filter(p=>p.id!==editing);persist();render();closeModal()}}
+$("#cancelBtn").onclick=closeModal;$("#modal").onclick=e=>{if(e.target.id==="modal")closeModal()}
+$("#addBtn").onclick=()=>{adding=!adding;viewport.classList.toggle("adding",adding);$("#addBtn").textContent=adding?"Clique sur la carte…":"＋ Ajouter un point"}
+viewport.addEventListener("click",e=>{if(!adding||drag)return;const rect=map.getBoundingClientRect();let x=(e.clientX-rect.left)/rect.width*100,y=(e.clientY-rect.top)/rect.height*100;if(x>=0&&x<=100&&y>=0&&y<=100)openModal(null,x.toFixed(4),y.toFixed(4))})
+function apply(){world.style.transform=`translate(${tx}px,${ty}px) scale(${scale})`;world.style.setProperty("--marker-scale",1/scale);$("#reset").textContent=Math.round(scale*100)+"%"}
+viewport.addEventListener("wheel",e=>{e.preventDefault();const old=scale;scale=Math.min(4,Math.max(.45,scale*(e.deltaY<0?1.12:.89)));const r=viewport.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top;tx=mx-(mx-tx)*(scale/old);ty=my-(my-ty)*(scale/old);apply()},{passive:false})
+viewport.onmousedown=e=>{if(adding)return;drag=true;sx=e.clientX-tx;sy=e.clientY-ty;viewport.style.cursor="grabbing"}
+window.onmousemove=e=>{if(drag){tx=e.clientX-sx;ty=e.clientY-sy;apply()}}
+window.onmouseup=()=>{drag=false;viewport.style.cursor=adding?"crosshair":"grab"}
+$("#plus").onclick=()=>{scale=Math.min(4,scale*1.2);apply()};$("#minus").onclick=()=>{scale=Math.max(.45,scale/1.2);apply()};$("#reset").onclick=()=>{scale=1;tx=0;ty=0;apply()}
+function centerOn(p){const r=viewport.getBoundingClientRect(),iw=map.clientWidth,ih=map.clientHeight;tx=r.width/2-(p.x/100*iw*scale);ty=r.height/2-(p.y/100*ih*scale);apply()}
+$("#search").oninput=render;
+$("#exportBtn").onclick=()=>{let blob=new Blob([JSON.stringify(pois,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="points.json";a.click();URL.revokeObjectURL(a.href)}
+$("#importBtn").onclick=()=>$("#fileInput").click();$("#fileInput").onchange=e=>{let f=e.target.files[0];if(!f)return;let rd=new FileReader();rd.onload=()=>{try{pois=JSON.parse(rd.result);persist();render()}catch{alert("Fichier JSON invalide")}};rd.readAsText(f)}
+async function loadPublicPoints(){
+ try{
+   const r=await fetch("points.json?ts="+Date.now(),{cache:"no-store"});
+   if(!r.ok) throw new Error("HTTP "+r.status);
+   const data=await r.json();
+   pois=Array.isArray(data)?data:[];
+ }catch(e){
+   console.warn("Impossible de charger points.json",e);
+   pois=[];
+ }
+ render();
+}
+makeFilters();apply();loadPublicPoints();
+</script>
+</body>
+</html>
