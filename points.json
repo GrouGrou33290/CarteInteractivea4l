@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "id": 1787449190659,
+    "name": "Point sans nom",
+    "category": "Héro",
+    "owner": "",
+    "icon": "🏥",
+    "x": 64.699,
+    "y": 35.0823,
+    "desc": ""
+  },
+  {
+    "id": 1787449195617,
+    "name": "hehq",
+    "category": "Maison",
+    "owner": "",
+    "icon": "📍",
+    "x": 45.0119,
+    "y": 54.9676,
+    "desc": "hr"
+  },
+  {
+    "id": 1787449199136,
+    "name": "Point sans nom",
+    "category": "Maison",
+    "owner": "",
+    "icon": "📍",
+    "x": 27.0424,
+    "y": 60.1867,
+    "desc": "qhh"
+  }
+]
