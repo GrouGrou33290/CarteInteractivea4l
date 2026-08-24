@@ -214,7 +214,7 @@
     "name": "Craft",
     "category": "Craft Arme",
     "owner": "033 994",
-    "icon": "📍",
+    "icon": "🔧",
     "x": 40.5303,
     "y": 6.584,
     "desc": ""
@@ -224,7 +224,7 @@
     "name": "Shop du Rat",
     "category": "Autres",
     "owner": "050 956",
-    "icon": "📍",
+    "icon": "🛒",
     "x": 62.2632,
     "y": 53.2124,
     "desc": ""
@@ -234,7 +234,7 @@
     "name": "Shop Secret",
     "category": "Autres",
     "owner": "059 956",
-    "icon": "📍",
+    "icon": "🛒",
     "x": 72.5846,
     "y": 52.4981,
     "desc": ""
@@ -244,7 +244,7 @@
     "name": "Traitement Dents",
     "category": "Dent en or",
     "owner": "071 948",
-    "icon": "📍",
+    "icon": "icons/dent-en-or.png",
     "x": 87.7989,
     "y": 62.3731,
     "desc": ""
@@ -254,7 +254,7 @@
     "name": "Traitement Dents",
     "category": "Dent en or",
     "owner": "038 940",
-    "icon": "📍",
+    "icon": "icons/dent-en-or.png",
     "x": 46.7275,
     "y": 72.2838,
     "desc": ""
@@ -264,7 +264,7 @@
     "name": "Traitement Dents",
     "category": "Dent en or",
     "owner": "050 971",
-    "icon": "📍",
+    "icon": "icons/dent-en-or.png",
     "x": 61.9141,
     "y": 34.6079,
     "desc": ""
@@ -274,7 +274,7 @@
     "name": "Cimetière Gatewood",
     "category": "Dent en or",
     "owner": "028 928",
-    "icon": "📍",
+    "icon": "icons/cimetiere.png",
     "x": 34.7643,
     "y": 87.488,
     "desc": ""
@@ -284,7 +284,7 @@
     "name": "Cimetière Dunes",
     "category": "Dent en or",
     "owner": "028 954",
-    "icon": "📍",
+    "icon": "icons/cimetiere.png",
     "x": 34.6157,
     "y": 56.0096,
     "desc": ""
@@ -294,7 +294,7 @@
     "name": "Cimetière Union",
     "category": "Dent en or",
     "owner": "",
-    "icon": "📍",
+    "icon": "icons/cimetiere.png",
     "x": 46.8657,
     "y": 55.0811,
     "desc": ""
@@ -304,7 +304,7 @@
     "name": "Champ Héroine",
     "category": "Héro",
     "owner": "075 974",
-    "icon": "📍",
+    "icon": "icons/hero.png",
     "x": 91.5091,
     "y": 31.9424,
     "desc": ""
@@ -314,7 +314,7 @@
     "name": "Traitement Héroine",
     "category": "Héro",
     "owner": "038 941",
-    "icon": "📍",
+    "icon": "icons/hero.png",
     "x": 46.5877,
     "y": 71.1168,
     "desc": ""
@@ -324,7 +324,7 @@
     "name": "Traitement Héroine",
     "category": "Héro",
     "owner": "025 963",
-    "icon": "📍",
+    "icon": "icons/hero.png",
     "x": 31.3011,
     "y": 44.8838,
     "desc": ""
@@ -334,7 +334,7 @@
     "name": "Traitement Héroine",
     "category": "Héro",
     "owner": "073 984",
-    "icon": "📍",
+    "icon": "icons/hero.png",
     "x": 89.706,
     "y": 19.4709,
     "desc": ""
@@ -344,7 +344,7 @@
     "name": "Champ Cocaine",
     "category": "Coca",
     "owner": "058 973",
-    "icon": "📍",
+    "icon": "icons/coca.png",
     "x": 69.9971,
     "y": 33.1668,
     "desc": ""
@@ -354,7 +354,7 @@
     "name": "Traitement Cocaine",
     "category": "Coca",
     "owner": "051 978",
-    "icon": "📍",
+    "icon": "icons/coca.png",
     "x": 62.3706,
     "y": 26.6886,
     "desc": ""
@@ -364,7 +364,7 @@
     "name": "Traitement Cocaine",
     "category": "Coca",
     "owner": "048 938",
-    "icon": "📍",
+    "icon": "icons/coca.png",
     "x": 59.2915,
     "y": 75.3437,
     "desc": ""
@@ -374,7 +374,7 @@
     "name": "Traitement Cocaine",
     "category": "Coca",
     "owner": "015 943",
-    "icon": "📍",
+    "icon": "icons/coca.png",
     "x": 18.7478,
     "y": 68.7891,
     "desc": ""
@@ -384,7 +384,7 @@
     "name": "Récolte Amphore",
     "category": "Amphore",
     "owner": "051 928",
-    "icon": "📍",
+    "icon": "icons/amphore.png",
     "x": 61.8591,
     "y": 87.2944,
     "desc": ""
@@ -394,7 +394,7 @@
     "name": "Traitement Amphore",
     "category": "Amphore",
     "owner": "056 967",
-    "icon": "📍",
+    "icon": "icons/amphore.png",
     "x": 69.1547,
     "y": 39.4003,
     "desc": ""
@@ -404,7 +404,7 @@
     "name": "Traitement Amphore",
     "category": "Amphore",
     "owner": "",
-    "icon": "📍",
+    "icon": "icons/amphore.png",
     "x": 10.6207,
     "y": 74.6492,
     "desc": ""
@@ -414,7 +414,7 @@
     "name": "Traitement Amphore",
     "category": "Amphore",
     "owner": "",
-    "icon": "📍",
+    "icon": "icons/amphore.png",
     "x": 34.8536,
     "y": 56.5371,
     "desc": ""
@@ -424,7 +424,7 @@
     "name": "Récolte Cannabis",
     "category": "Maji",
     "owner": "011 939",
-    "icon": "📍",
+    "icon": "icons/maji.png",
     "x": 14.6505,
     "y": 73.7981,
     "desc": ""
@@ -434,7 +434,7 @@
     "name": "Traitement Cannabis",
     "category": "Maji",
     "owner": "",
-    "icon": "📍",
+    "icon": "icons/maji.png",
     "x": 20.7394,
     "y": 17.6847,
     "desc": ""
@@ -444,7 +444,7 @@
     "name": "Traitement Cannabis",
     "category": "Maji",
     "owner": "",
-    "icon": "📍",
+    "icon": "icons/maji.png",
     "x": 47.1624,
     "y": 55.9362,
     "desc": ""
@@ -454,7 +454,7 @@
     "name": "Traitement Cannabis",
     "category": "Maji",
     "owner": "036 929",
-    "icon": "📍",
+    "icon": "icons/maji.png",
     "x": 44.8206,
     "y": 86.1114,
     "desc": ""
@@ -464,7 +464,7 @@
     "name": "Replaqueur",
     "category": "Replaqueur",
     "owner": "071 982",
-    "icon": "📍",
+    "icon": "icons/replaqueur.png",
     "x": 87.3836,
     "y": 21.5557,
     "desc": ""
@@ -474,7 +474,7 @@
     "name": "Replaqueur",
     "category": "Replaqueur",
     "owner": "025 926",
-    "icon": "📍",
+    "icon": "icons/replaqueur.png",
     "x": 30.2891,
     "y": 89.2555,
     "desc": ""
@@ -484,7 +484,7 @@
     "name": "Replaqueur",
     "category": "Replaqueur",
     "owner": "058 960",
-    "icon": "📍",
+    "icon": "icons/replaqueur.png",
     "x": 70.9682,
     "y": 48.7787,
     "desc": ""
@@ -494,7 +494,7 @@
     "name": "Vanderville",
     "category": "Gang",
     "owner": "032 959",
-    "icon": "📍",
+    "icon": "🏢",
     "x": 38.5482,
     "y": 50.0611,
     "desc": ""
@@ -504,7 +504,7 @@
     "name": "Gang Gatewood",
     "category": "Gang",
     "owner": "026 928",
-    "icon": "📍",
+    "icon": "🏢",
     "x": 32.0238,
     "y": 87.4811,
     "desc": ""
@@ -514,7 +514,7 @@
     "name": "Momo",
     "category": "Momo",
     "owner": "054 938",
-    "icon": "📍",
+    "icon": "icons/momo.png",
     "x": 66.5975,
     "y": 75.3692,
     "desc": ""
@@ -524,19 +524,9 @@
     "name": "Momo",
     "category": "Momo",
     "owner": "063 977",
-    "icon": "📍",
+    "icon": "icons/momo.png",
     "x": 77.6867,
     "y": 27.6467,
-    "desc": ""
-  },
-  {
-    "id": 1787451124616,
-    "name": "Momo",
-    "category": "Momo",
-    "owner": "",
-    "icon": "📍",
-    "x": 71.2938,
-    "y": 47.7896,
     "desc": ""
   },
   {
@@ -544,7 +534,7 @@
     "name": "Momo",
     "category": "Momo",
     "owner": "004 934",
-    "icon": "📍",
+    "icon": "icons/momo.png",
     "x": 5.0463,
     "y": 80.5969,
     "desc": ""
@@ -554,7 +544,7 @@
     "name": "Cambriolage",
     "category": "Maison cambu",
     "owner": "",
-    "icon": "📍",
+    "icon": "icons/cambu.png",
     "x": 19.5671,
     "y": 56.4188,
     "desc": ""
@@ -564,7 +554,7 @@
     "name": "Cambriolage",
     "category": "Maison cambu",
     "owner": "020 927",
-    "icon": "📍",
+    "icon": "icons/cambu.png",
     "x": 25.517,
     "y": 89.0794,
     "desc": ""
@@ -574,7 +564,7 @@
     "name": "Cambriolage",
     "category": "Maison cambu",
     "owner": "012 946",
-    "icon": "📍",
+    "icon": "icons/cambu.png",
     "x": 15.8327,
     "y": 66.3396,
     "desc": ""
@@ -584,7 +574,7 @@
     "name": "Cambriolage",
     "category": "Maison cambu",
     "owner": "",
-    "icon": "📍",
+    "icon": "icons/cambu.png",
     "x": 25.6859,
     "y": 17.9521,
     "desc": ""
@@ -594,7 +584,7 @@
     "name": "Momo",
     "category": "Momo",
     "owner": "",
-    "icon": "📍",
+    "icon": "icons/momo.png",
     "x": 25.7395,
     "y": 18.4343,
     "desc": ""
@@ -604,7 +594,7 @@
     "name": "Cambriolage",
     "category": "Maison cambu",
     "owner": "",
-    "icon": "📍",
+    "icon": "icons/cambu.png",
     "x": 88.2129,
     "y": 15.2136,
     "desc": ""
@@ -614,7 +604,7 @@
     "name": "Cambriolage",
     "category": "Maison cambu",
     "owner": "052 937",
-    "icon": "📍",
+    "icon": "icons/cambu.png",
     "x": 64.8237,
     "y": 76.144,
     "desc": ""
@@ -624,7 +614,7 @@
     "name": "Cambriolage",
     "category": "Maison cambu",
     "owner": "053 946",
-    "icon": "📍",
+    "icon": "icons/cambu.png",
     "x": 65.8748,
     "y": 64.9439,
     "desc": ""
@@ -634,7 +624,7 @@
     "name": "Cambriolage",
     "category": "Maison cambu",
     "owner": "034 965",
-    "icon": "📍",
+    "icon": "icons/cambu.png",
     "x": 41.8476,
     "y": 42.4775,
     "desc": ""
@@ -644,7 +634,7 @@
     "name": "Cambriolage",
     "category": "Maison cambu",
     "owner": "031 970",
-    "icon": "📍",
+    "icon": "icons/cambu.png",
     "x": 38.294,
     "y": 36.2275,
     "desc": ""
@@ -654,7 +644,7 @@
     "name": "Cambriolage",
     "category": "Maison cambu",
     "owner": "",
-    "icon": "📍",
+    "icon": "icons/cambu.png",
     "x": 89.5031,
     "y": 67.8692,
     "desc": ""
@@ -672,11 +662,21 @@
   {
     "id": 1787503225798,
     "name": "Gang Falls Church",
-    "category": "Maison",
+    "category": "Gang",
     "owner": "059 969",
-    "icon": "📍",
+    "icon": "🏢",
     "x": 71.5027,
     "y": 46.841,
+    "desc": ""
+  },
+  {
+    "id": 1787581899734,
+    "name": "Momo",
+    "category": "Momo",
+    "owner": "",
+    "icon": "icons/momo.png",
+    "x": 71.3615,
+    "y": 47.1443,
     "desc": ""
   }
 ]
