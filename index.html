@@ -63,7 +63,7 @@ textarea{resize:vertical;min-height:70px}.full{grid-column:1/-1}.cardfooter{disp
 <label><span>Nom</span><input id="name" placeholder="Ex : Commissariat"></label>
 <label><span>Catégorie</span><select id="category"><option>Maison</option><option>Momo</option><option>Replaqueur</option><option>Dent en or</option><option>Héro</option><option>Coca</option><option>Maji</option><option>Amphore</option><option>Maison cambu</option><option>Gang</option><option>Craft Arme</option><option>Autres</option></select></label>
 <label><span>Propriétaire / responsable</span><input id="owner" placeholder="Facultatif"></label>
-<label><span>Icône</span><select id="icon"><option>📍</option><option>🏠</option><option>🚓</option><option>🏥</option><option>🔧</option><option>🏢</option><option>🛒</option><option>💰</option><option>⚓</option><option>✈️</option></select></label>
+<label><span>Icône</span><select id="icon"><option value="📍">📍 Point</option><option value="🏠">🏠 Maison</option><option value="🚓">🚓 Police</option><option value="🏥">🏥 Hôpital</option><option value="🔧">🔧 Outils</option><option value="🏢">🏢 Bâtiment</option><option value="🛒">🛒 Commerce</option><option value="💰">💰 Argent</option><option value="⚓">⚓ Port</option><option value="✈️">✈️ Aéroport</option><option value="icons/replaqueur.png">Replaqueur</option><option value="icons/cambu.png">Cambu</option><option value="icons/cimetiere.png">Cimetière</option><option value="icons/coca.png">Coca</option><option value="icons/dent-en-or.png">Dent en or</option><option value="icons/hero.png">Héro</option><option value="icons/maji.png">Maji</option><option value="icons/momo.png">Momo</option><option value="icons/amphore.png">Amphore</option></select></label>
 <label><span>X (%)</span><input id="x" type="number" step=".0001"></label>
 <label><span>Y (%)</span><input id="y" type="number" step=".0001"></label>
 <label class="full"><span>Description</span><textarea id="desc" placeholder="Informations complémentaires…"></textarea></label>
@@ -81,9 +81,9 @@ function render(){
  $("#markers").innerHTML=""; $("#list").innerHTML="";
  const q=$("#search").value.toLowerCase();
  pois.filter(p=>(filter==="Tous"||p.category===filter)&&JSON.stringify(p).toLowerCase().includes(q)).forEach(p=>{
-  const m=document.createElement("div");m.className="marker";m.style.left=p.x+"%";m.style.top=p.y+"%";m.textContent=p.icon||"📍";
+  const m=document.createElement("div");m.className="marker";m.style.left=p.x+"%";m.style.top=p.y+"%"; const iconValue=p.icon||"📍"; if(iconValue.startsWith("icons/")){const im=document.createElement("img");im.src=iconValue;im.alt="";im.style.width="18px";im.style.height="18px";im.style.objectFit="contain";im.style.borderRadius="3px";m.appendChild(im)}else{m.appendChild(document.createTextNode(iconValue));}
   const t=document.createElement("span");t.className="tip";t.textContent=p.name+(p.owner?" • "+p.owner:"");m.appendChild(t);m.onclick=e=>{e.stopPropagation();openModal(p)};$("#markers").appendChild(m);
-  const r=document.createElement("div");r.className="poirow";r.innerHTML=`<b>${p.icon||"📍"} ${esc(p.name)}</b><small>${esc(p.category)}${p.owner?" • "+esc(p.owner):""}</small>`;r.onclick=()=>centerOn(p);$("#list").appendChild(r);
+  const r=document.createElement("div");r.className="poirow"; const listIcon=(p.icon||"📍").startsWith("icons/")?`<img src="${esc(p.icon)}" alt="" style="width:20px;height:20px;object-fit:contain;vertical-align:middle;border-radius:3px">`:esc(p.icon||"📍"); r.innerHTML=`<b>${listIcon} ${esc(p.name)}</b><small>${esc(p.category)}${p.owner?" • "+esc(p.owner):""}</small>`;r.onclick=()=>centerOn(p);$("#list").appendChild(r);
  });
 }
 function esc(s=""){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
